@@ -11,6 +11,13 @@ class DigitalTimer extends Component {
     this.state = {isStart: false, limit: 25}
   }
 
+  clickOnIcon = () => {
+    this.setState(prevState => {
+      const {isStart} = prevState
+      return {isStart: !isStart}
+    })
+  }
+
   clickOnMinus = () => {
     this.setState(prevState => ({limit: prevState.limit - 1}))
   }
@@ -27,35 +34,39 @@ class DigitalTimer extends Component {
     const timerText = isStart ? 'Running' : 'Paused'
     const jsxElement = (
       <div className="app-bg-container">
+        <h1 className="heading">Digital Timer</h1>
         <div className="sub-app-container">
-          <h1 className="heading">Digital Timer</h1>
           <div className="timer-bg-container">
             <h1>{limit}:00</h1>
             <p>{timerText}</p>
           </div>
-          <div className="reset-play-container">
-            <div className="icons-container">
-              <img src={iconImage} alt={iconAlt} className="icons" />
-              <button type="button">{iconText}</button>
+          <div>
+            <div className="reset-play-container">
+              <div className="icons-container">
+                <img src={iconImage} alt={iconAlt} className="icons" />
+                <button type="button" onClick={this.clickOnIcon}>
+                  {iconText}
+                </button>
+              </div>
+              <div className="icons-container">
+                <img
+                  src="https://assets.ccbp.in/frontend/react-js/reset-icon-img.png "
+                  alt="reset icon"
+                  className="icons"
+                />
+                <button type="button">Reset</button>
+              </div>
             </div>
-            <div className="icons-container">
-              <img
-                src="https://assets.ccbp.in/frontend/react-js/reset-icon-img.png "
-                alt="reset icon"
-                className="icons"
-              />
-              <button type="button">Reset</button>
+            <p className="timer-description">Set Timer limit</p>
+            <div className="buttons-container">
+              <button type="button" onClick={this.clickOnMinus}>
+                -
+              </button>
+              <p className="time-limit">{limit}</p>
+              <button type="button" onClick={this.clickOnPlus}>
+                +
+              </button>
             </div>
-          </div>
-          <p className="timer-description">Set Timer limit</p>
-          <div className="buttons-container">
-            <button type="button" onClick={this.clickOnMinus}>
-              -
-            </button>
-            <p className="time-limit">{limit}</p>
-            <button type="button" onClick={this.clickOnPlus}>
-              +
-            </button>
           </div>
         </div>
       </div>
